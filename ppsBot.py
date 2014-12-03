@@ -31,7 +31,10 @@ for page in pages:
         try:
             fileName = url[50:]
         except:
-            fileName = url[51:]
+            try:
+                fileName = url[51:]
+            except:
+                pass
         print "fetching " + url
         downloadFile(url, fileName)
 
