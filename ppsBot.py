@@ -5,11 +5,19 @@ import os
 
 def downloadFile(url, fileName):
     r = requests.get(url, stream = True)
-    with open(fileName, 'wb') as f:
-        for chunk in r.iter_content(chunk_size=1024): 
-            if chunk:
-                f.write(chunk)
-                f.flush()
+    try:
+        with open(fileName, 'wb') as f:
+            for chunk in r.iter_content(chunk_size=1024): 
+                if chunk:
+                    f.write(chunk)
+                    f.flush()
+    except:
+        fileName = fileName.strip('/')
+        with open(fileName, 'wb') as f:
+            for chunk in r.iter_content(chunk_size=1024): 
+                if chunk:
+                    f.write(chunk)
+                    f.flush()
 
 
 
@@ -28,13 +36,7 @@ for page in pages:
         url = post['download_link']
         #fileName is extracted from download url of the following type
         #https://www.facebook.com/download/837214882985735/scipy-ref-0.14.0.pdf
-        try:
-            fileName = url[50:]
-        except:
-            try:
-                fileName = url[51:]
-            except:
-                pass
+        fileName = url[50:]
         print "fetching " + url
         downloadFile(url, fileName)
 
