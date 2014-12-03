@@ -28,7 +28,10 @@ for page in pages:
         url = post['download_link']
         #fileName is extracted from download url of the following type
         #https://www.facebook.com/download/837214882985735/scipy-ref-0.14.0.pdf
-        fileName = url[50:]
+        try:
+            fileName = url[50:]
+        except:
+            fileName = url[51:]
         print "fetching " + url
         downloadFile(url, fileName)
 
