@@ -3,6 +3,7 @@ import json
 import requests
 import os
 
+#install facepy module. Use pip install facepy
 def downloadFile(url, fileName):
     r = requests.get(url, stream = True)
     try:
@@ -22,6 +23,8 @@ def downloadFile(url, fileName):
 
 
 groupId = "714685238558448"
+#Generate access token here
+#https://developers.facebook.com/tools/explorer/
 accessToken = "###"
 
 graph = GraphAPI(accessToken)
